@@ -95,7 +95,6 @@ export const getOnlineUsers = () => {
   return async dispatch => {
     try {
       const response = await axiosApi.get("/onlineUsers");
-      console.log(response.data)
       dispatch(getOnlineUsersSuccess(response.data));
     } catch (e) {
       dispatch(getOnlineUsersFailure(e.response.data));
@@ -110,7 +109,6 @@ export const addOnlineUser = (data) => {
         "Authorization": getState().users.user.token,
       };
       const response = await axiosApi.post("/onlineUsers", data, {headers});
-      console.log(response)
       dispatch(addOnlineUserSuccess(response.data));
     } catch (e) {
       dispatch(addOnlineUserFailure(e.response.data));
@@ -124,9 +122,7 @@ export const deleteOnlineUser = () =>{
       const headers = {
         "Authorization": getState().users.user.token,
       };
-      console.log('asd');
       await axiosApi.delete("/onlineUsers", {headers});
-      console.log('asd');
       dispatch(deleteOnlineUserSuccess());
     } catch (e) {
       dispatch(deleteOnlineUserFailure(e.response.data));

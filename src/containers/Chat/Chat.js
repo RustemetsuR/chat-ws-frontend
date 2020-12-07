@@ -20,11 +20,9 @@ const Chat = props => {
                 dispatch(deleteOnlineUser());
                 setInterval(() => {
                     dispatch(getOnlineUsers());
-                    console.log(onlineUsers)
                 }, 2000);
 
                 dispatch(addOnlineUser(user));
-                console.log(onlineUsers)
                 ws.current = new WebSocket("ws://localhost:8000/chatroom?token=" + user.token);
 
                 ws.current.onopen = () => {
