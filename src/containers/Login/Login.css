@@ -1,0 +1,52 @@
+.form-box{
+    text-align: center;
+    width: 50%;
+    margin: 50px auto;
+    /* border: 3px solid rgb(45, 109, 45); */
+    background: rgb(45, 109, 45);
+    border-radius: 5px;
+    padding: 50px 25px;
+    position: relative;
+}
+
+.form-title{
+    margin: 0;
+    border-bottom: 1px solid whitesmoke;
+    padding-bottom: 10px;
+}
+
+.form-box form{
+    margin-top: 30px;
+}
+
+.form-box input{
+    display: block;
+    width: 50%;
+    margin: 10px auto;
+    background: none;
+    border: 1px solid white;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.form-box input::placeholder{
+    color: whitesmoke;
+}
+
+.form-box button{
+    background: none;
+    color: whitesmoke;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+}
+
+.form-box a{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+}

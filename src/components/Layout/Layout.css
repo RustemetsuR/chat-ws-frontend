@@ -1,0 +1,23 @@
+.page-header{
+    background:  rgb(45, 109, 45);
+    padding: 25px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 0px 4px black;
+}
+
+.page-header-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h2{
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.page-header a{
+    text-transform: capitalize;
+}
