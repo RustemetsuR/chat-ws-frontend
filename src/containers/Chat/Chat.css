@@ -4,3 +4,13 @@
     overflow-y: scroll;
     padding: 10px 50px;
 }
+
+.online-users-box{
+    position: absolute;
+    left: 50px;
+}
+
+.online-users-box p{
+    border-bottom: 1px solid white;
+    padding: 5px 0;
+}

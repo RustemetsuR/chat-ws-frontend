@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addOnlineUser, deleteOnlineUser, getOnlineUsers } from '../../store/actions/usersActions';
 import './Chat.css';
 
 const Chat = props => {
-
+    const dispatch = useDispatch();
     const user = useSelector(state => state.users.user);
+    const onlineUsers = useSelector(state => state.users.onlineUsers);
     const [messages, setMessages] = useState([]);
     const [messageText, setMessageText] = useState("");
 
@@ -12,9 +14,17 @@ const Chat = props => {
 
     useEffect(() => {
         if (user === null) {
-            props.history.replace("/register")
+            props.history.replace("/register");
         } else {
             const startWS = () => {
+                dispatch(deleteOnlineUser());
+                setInterval(() => {
+                    dispatch(getOnlineUsers());
+                    console.log(onlineUsers)
+                }, 2000);
+
+                dispatch(addOnlineUser(user));
+                console.log(onlineUsers)
                 ws.current = new WebSocket("ws://localhost:8000/chatroom?token=" + user.token);
 
                 ws.current.onopen = () => {
@@ -22,10 +32,11 @@ const Chat = props => {
                 };
 
                 ws.current.onclose = () => {
-                    console.log('ws connection closed')
+                    console.log('ws connection closed');
+                    dispatch(deleteOnlineUser());
+                    clearInterval();
                     setTimeout(startWS, 5000);
                 }
-
                 ws.current.onmessage = e => {
                     const decodedMessage = JSON.parse(e.data);
                     if (decodedMessage.type === "NEW_MESSAGE") {
@@ -38,7 +49,7 @@ const Chat = props => {
             }
             startWS();
         }
-    }, [user, props.history]);
+    }, [user, props.history, dispatch]);
 
     const changeMessage = e => {
         setMessageText(e.target.value);
@@ -55,6 +66,14 @@ const Chat = props => {
     return (
         <div>
             <div>
+                <div className='online-users-box'>
+                    <h3>Online Users: </h3>
+                    {onlineUsers && onlineUsers.map(user => {
+                        return <div key={user._id}>
+                            <p>{user.username}</p>
+                        </div>
+                    })}
+                </div>
                 <div className='messages-box'>
                     {messages.map(m => {
                         return <div key={m._id}>
